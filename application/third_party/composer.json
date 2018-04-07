@@ -1,0 +1,13 @@
+{
+    "name": "thinkpad/third_party",
+    "description": "kumpulan library CI",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.2"
+    },
+    "authors": [
+        {
+            "name": "kocortowap1",
+            "email": "kocortowap@gmail.com"
+        }
+    ]
+}
