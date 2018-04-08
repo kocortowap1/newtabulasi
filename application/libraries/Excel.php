@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('AKSES DITOLAK');
 require_once APPPATH ."third_party/vendor/autoload.php";
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-
+use PhpOffice\PhpSpreadsheet\IOFactory;
 class Excel
 {
     public function read_excel($path){
@@ -19,13 +19,27 @@ class Excel
         }
         return $output;
     }
-    public function write_excel(){
-        $xls = new PhpOffice\PhpSpreadsheet\Spreadsheet();
-        $sheet = $xls->getSheet(0);
-        $data = array(['nama','tetala'],['ahmad','paiton'],['ahmad1','paiton1'],['ahmad2','paiton2']);
-        $sheet->fromArray($data, NULL,'A1',false);
-        $writer = PhpOffice\PhpSpreadsheet\IOFactory::createWriter($xls,'Xlsx');
+    public function write_excel($data,$filename){
+        $xls = new Spreadsheet();
+        $xls->getProperties()
+            ->setCreator('UNUJA Online System')
+            ->setTitle('Tes buat excel');
+        //$data = [['nama','tetala'],['ahmad','paiton'],['ahmad1','paiton1'],['ahmad2','paiton2']];
+        $xls->setActiveSheetIndex(0)
+            ->fromArray($data, NULL, 'A1', FALSE);
+        $xls->getActiveSheet()->setTitle('Tes');
+        $xls->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$filename.'.xlsx"');
+        header('Cache-Control: max-age=0');  // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1'); // If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 15 Jul 2019 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
+        $writer = IOFactory::createWriter($xls,'Xlsx');
 
-        return $writer;
+        $writer->save('php://output');
+        exit();
     }
 }

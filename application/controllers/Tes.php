@@ -1,6 +1,8 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH."third_party/vendor/autoload.php";
+
 
 class Tes extends MY_Controller {
 
@@ -14,16 +16,17 @@ class Tes extends MY_Controller {
 
 
     public function index(){
-        require_once (APPPATH."third_party/vendor/autoload.php");
         //use PhpOffice\PhpSpreadsheet\Reader\IReader
         $path= FCPATH . "files/tes.xlsx";
         $data = $this->excel->read_excel($path);
         $this->preview($data['data']);
     }
     function buat_excel(){
+
     //    $xls =  $this->excel->write_excel();
        //$this->preview($xls);
-       $this->excel->write_excel();
+       $data = [['nama','tetala'],['ahmad','paiton'],['ahmad1','paiton1'],['ahmad2','paiton2']];
+       $this->excel->write_excel($data,'Contoh');
     }
     function upload($data = null){
         $data = array('data'=>$data);
