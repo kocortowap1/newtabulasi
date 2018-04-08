@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('AKSES DITOLAK');
 require_once APPPATH ."third_party/vendor/autoload.php";
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 class Excel
 {
     public function read_excel($path){
@@ -19,8 +20,8 @@ class Excel
         return $output;
     }
     public function write_excel(){
-        // $xls = new PhpOffice\PhpSpreadsheet\Spreadsheet();
-        $xls = new Spreadsheet();
+        $xls = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+        // $xls = new Spreadsheet();
         $sheet = $xls->getSheet(0);
         $data = array(['nama','tetala'],['ahmad','paiton'],['ahmad1','paiton1'],['ahmad2','paiton2']);
         $sheet->fromArray($data, NULL,'A1',false);
