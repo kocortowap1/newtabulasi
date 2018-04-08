@@ -25,10 +25,7 @@ class Excel
         $data = array(['nama','tetala'],['ahmad','paiton'],['ahmad1','paiton1'],['ahmad2','paiton2']);
         $sheet->fromArray($data, NULL,'A1',false);
         $writer = PhpOffice\PhpSpreadsheet\IOFactory::createWriter($xls,'Xlsx');
-       /*  $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($sheet);*/
-        // $writer->save('tes.xlsx');
-        /* $xls->disconnectWorksheets();
-        unset($xls); */
+
         return $writer;
     }
 }
