@@ -21,7 +21,6 @@ class Excel
     }
     public function write_excel(){
         $xls = new PhpOffice\PhpSpreadsheet\Spreadsheet();
-        // $xls = new Spreadsheet();
         $sheet = $xls->getSheet(0);
         $data = array(['nama','tetala'],['ahmad','paiton'],['ahmad1','paiton1'],['ahmad2','paiton2']);
         $sheet->fromArray($data, NULL,'A1',false);
