@@ -25,6 +25,9 @@ class Tes extends CI_Controller {
         echo "</pre>";
         // echo "tes";
     }
+    function test(){
+        echo "hello World";
+    }
 
 }
 
